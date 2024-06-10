@@ -1,0 +1,51 @@
+{
+  "resourceType": "Patient",
+  "id": "100",
+  "identifier": [
+    {
+      "system": "opd/clinc/bht",
+      "value": "100"
+    }
+  ],
+  "name": [
+    {
+      "text": "fName lName",
+      "given": [
+        "fName"
+      ],
+      "family": "lName"
+    }
+  ],
+  "telecom": [
+    {
+      "system": "phone",
+      "value": "0771234567",
+      "use": "mobile"
+    },
+    {
+      "system": "phone",
+      "value": "011234567",
+      "use": "home"
+    }
+  ],
+  "gender": "male",
+  "birthDate": "2000-01-01",
+  "deceasedBoolean": false,
+  "address": [
+    {
+      "text": "no street town district",
+      "type": "postal",
+      "district": "district",
+      "country": "country"
+    }
+  ],
+
+  "generalPractitioner": [
+    {
+      "reference": "cfsb1715411954698"
+    }
+  ],
+  "managingOrganization": {
+    "reference": "cfsb1715411992769"
+  }
+}
