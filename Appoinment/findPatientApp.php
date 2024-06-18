@@ -1,5 +1,5 @@
 <?php 
-include 'phpfiles/header.php';
+include '../phpfiles/header.php';
 ?>
 <!doctype html>
 <html lang="en">
@@ -8,9 +8,9 @@ include 'phpfiles/header.php';
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>NPTCCD </title>
-  <link rel="apple-touch-icon" sizes="180x180" href="imgs/favicon/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="imgs/favicon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="imgs/favicon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../imgs/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../imgs/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../imgs/favicon/favicon-16x16.png">
 <link rel="manifest" href="/site.webmanifest">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -18,7 +18,7 @@ include 'phpfiles/header.php';
 
 <body style="background-color: #FFFAFA;">
 
-  <?php include 'includes/topNav.php'; ?> <!-- Top Navigation -->
+  <?php include '../includes/topNav.php'; ?> <!-- Top Navigation -->
 
 
 
@@ -26,7 +26,7 @@ include 'phpfiles/header.php';
 
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="home.php">Home</a></li>
+        <li class="breadcrumb-item"><a href="../home.php">Home</a></li>
         <li class="breadcrumb-item active" aria-current="page">Search</li>
     </ol>
 </nav>
@@ -121,7 +121,7 @@ function calculateAge($birthdate) {
 
 
     if (isset($_POST['searchType'])) {
-        include 'phpfiles/db.php';
+        include '../phpfiles/db.php';
 
 $fld = '%'.$_POST['searchFld'].'%';
 
@@ -203,9 +203,9 @@ $_SESSION['searchValue'] =$_POST['searchFld'];
 </script>
 
 
-<script type="text/javascript"src="jscodes/functions.js" ></script>
+<script type="text/javascript"src="../jscodes/functions.js" ></script>
 
-<?php include 'includes/footer.php'; ?> <!-- Footer -->
+<?php include '../includes/footer.php'; ?> <!-- Footer -->
 
 <style type="text/css">
     a {

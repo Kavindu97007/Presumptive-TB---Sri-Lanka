@@ -1,5 +1,5 @@
 <?php 
-include 'phpfiles/header.php';
+include '../phpfiles/header.php';
 ?>
 <!doctype html>
 <html lang="en">
@@ -8,9 +8,9 @@ include 'phpfiles/header.php';
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>NPTCCD </title>
-  <link rel="apple-touch-icon" sizes="180x180" href="imgs/favicon/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="imgs/favicon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="imgs/favicon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../imgs/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../imgs/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../imgs/favicon/favicon-16x16.png">
 <link rel="manifest" href="/site.webmanifest">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -18,7 +18,7 @@ include 'phpfiles/header.php';
 
 <body style="background-color: #FFFAFA;">
 
-  <?php include 'includes/topNav.php'; ?> <!-- Top Navigation -->
+  <?php include '../includes/topNav.php'; ?> <!-- Top Navigation -->
 
 
 
@@ -26,16 +26,16 @@ include 'phpfiles/header.php';
 
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="home.php">Home</a></li>
+            <li class="breadcrumb-item"><a href="../home.php">Home</a></li>
             <li class="breadcrumb-item"><a href="findpatient.php">Find Patient</a></li>
             <li class="breadcrumb-item active" aria-current="page">Patient</li>
         </ol>
     </nav>
 
     <?php 
-    include 'phpfiles/db.php';
+    include '../phpfiles/db.php';
 
-    $sql = "SELECT * FROM `analytics` WHERE `ptId`=".$_GET['ptId'];
+    $sql = "SELECT * FROM `patient` WHERE `patientId`=".$_GET['patientId'];
     //echo $sql;
     $result = mysqli_query($conn, $sql);
     
@@ -47,17 +47,17 @@ include 'phpfiles/header.php';
         echo "
         <table class='table'>
             <tr>
-                <td>Identification Numbers : PTB".$row['ptId'].checkEmpty($row['givenId'])." </td>
+                <td>Identification Numbers : PTB".$row['patientId'].checkEmpty($row['fName'])." </td>
             </tr>
 
             <tr>
-                <td>".$row['nameGiven']." ". $row['nameFamily']."
-                 | ".$row['gender']." | ".$row['birthdate']." (Age ".calculateAge($row['birthdate']).") </td>
+                <td>".$row['fName']." ". $row['lName']."
+                 | ".$row['gender']." | ".$row['dob']." (Age ".calculateAge($row['dob']).") </td>
             </tr>
 
             <tr>
-                <td>".$row['addressText'].", ". $row['addressCity']."
-                 | ".$row['mobileNo']." | ".$row['homePhone']." </td>
+                <td>".$row['adrs'].", ". $row['distric']."
+                 | ".$row['mobileNumber']." | ".$row['homeNumber']." </td>
             </tr>
             ";
 
@@ -103,21 +103,21 @@ include 'phpfiles/header.php';
             <tr> 
                 <td> 1 </td> <td> ". $row['sp_1_date']." </td> <td> ".$row['sp_1_result']." </td>
                 <td> 
-                  ". generateLink($row['sp_1_date'],$row['ptId'],'sp','1'). "
+                  ". generateLink($row['sp_1_date'],$row['patientId'],'sp','1'). "
                 </td>
             </tr>
 
             <tr> 
                 <td> 2 </td> <td> ". $row['sp_2_date']." </td> <td> ".$row['sp_2_result']." </td>
                 <td> 
-                    ". generateLink($row['sp_2_date'],$row['ptId'],'sp','2'). "
+                    ". generateLink($row['sp_2_date'],$row['patientId'],'sp','2'). "
                 </td>
             </tr>
 
             <tr> 
                 <td> 3 </td> <td> ". $row['sp_3_date']." </td> <td> ".$row['sp_3_result']." </td>
                 <td> 
-                    ". generateLink($row['sp_3_date'],$row['ptId'],'sp','3'). "
+                    ". generateLink($row['sp_3_date'],$row['patientId'],'sp','3'). "
                 </td>
             </tr>
             
@@ -131,7 +131,7 @@ include 'phpfiles/header.php';
             <tr> 
                 <td>  </td> <td> ". $row['GeneXpert_date']." </td> <td> ".$row['GeneXpert_result']." </td>
                 <td> 
-                    ". generateLink($row['GeneXpert_date'],$row['ptId'],'gene','1'). "
+                    ". generateLink($row['GeneXpert_date'],$row['patientId'],'gene','1'). "
                 </td>
             </tr>
             ";
@@ -144,7 +144,7 @@ include 'phpfiles/header.php';
             <tr> 
                 <td>  </td> <td> ". $row['xray_date']." </td> <td> ".$row['xray_result']." </td>
                 <td> 
-                    ". generateLink($row['xray_date'],$row['ptId'],'xray','1'). "
+                    ". generateLink($row['xray_date'],$row['patientId'],'xray','1'). "
                 </td>
             </tr>
             ";
@@ -160,7 +160,7 @@ include 'phpfiles/header.php';
         <td>". $row['diagnosis_date']." </td> 
         <td>".$row['diagnosis_term']." - ". $row['diagnosis_icd']."</td>
         <td> 
-            ". generateLink($row['diagnosis_date'],$row['ptId'],'diag','1') . "
+            ". generateLink($row['diagnosis_date'],$row['patientId'],'diag','1') . "
         </td>
     </tr>
             ";
@@ -185,10 +185,10 @@ function checkEmpty($nme) {
     }
     }
 
-function generateLink($invsDate, $ptId, $typ, $nmbr) {
+function generateLink($invsDate, $patientId, $typ, $nmbr) {
     $lnk ='';
     if ($typ =='sp') {
-        $lnk = "SputumResult.php?ptId=";
+        $lnk = "../phpfiles/SputumResult.php?ptId=";
     }
     elseif ($typ =='gene') {
         $lnk = "GeneXpertResult.php?ptId=";
@@ -201,9 +201,9 @@ function generateLink($invsDate, $ptId, $typ, $nmbr) {
     }      
 
     if ($invsDate == '0000-00-00') {
-        return "<a href=new".$lnk.$ptId."&n=".$nmbr."><img src='imgs/add.png'></a>";
+        return "<a href=new".$lnk.$patientId."&n=".$nmbr."><img src='../imgs/add.png'></a>";
     } else {
-        return "<a href=edit".$lnk.$ptId."&n=".$nmbr."><img src='imgs/edit.png'></a>";
+        return "<a href=edit".$lnk.$patientId."&n=".$nmbr."><img src='../imgs/edit.png'></a>";
     }
 }
 
@@ -227,7 +227,7 @@ function calculateAge($dateOfBirth) {
 
 
 
-<?php include 'includes/footer.php'; ?> <!-- Footer -->
+<?php include '../includes/footer.php'; ?> <!-- Footer -->
 
 <style type="text/css">
     #subhead1{

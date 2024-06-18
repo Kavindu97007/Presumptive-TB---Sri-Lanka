@@ -26,8 +26,8 @@
            </a>
            <ul class='dropdown-menu' aria-labelledby='navbarDropdown'>
            <li><a class='dropdown-item' href='register.php'>Register New Patient</a></li>
-           <li><a class='dropdown-item' href='findPatientApp.php'>Get an Appointment</a></li>
-           <li><a class='dropdown-item' href='findPatient.php'>Find Patient</a></li>
+           <li><a class='dropdown-item' href='../Appoinment/findPatientApp.php'>Get an Appointment</a></li>
+           <li><a class='dropdown-item' href='../Patient/findPatient.php'>Find Patient</a></li>
            <li><a class='dropdown-item' href='#'>Add Results</a></li>
            <li><a class='dropdown-item' href=scanQr>Scan QR</a></li>
            </ul>

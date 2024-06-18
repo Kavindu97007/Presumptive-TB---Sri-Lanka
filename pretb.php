@@ -2,12 +2,6 @@
 include 'phpfiles/header.php';
 ?>
 
-<?php
-
-print_r($_SESSION);
-
-
-?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -37,61 +31,22 @@ print_r($_SESSION);
     </ol>
 </nav>
 
-
-
-<!--         <select class="form-select" id="addressCity" aria-label="Default select example"onchange="fetchData()" >
-          <option selected value="all">All Districts</option>
-  <?php include 'includes/district_options.php' ?>
-      </select> -->
-
       <?php
+if (isset($_SESSION['userType']) && $_SESSION['userType'] == 1) { // if the usertype is 1--> shows all records
 
-        if (isset($_SESSION['userType']) && $_SESSION['userType'] == 1){
-            echo "<div class='row' id='selectDistrict'>
-                <form action='' method='GET'>
-                
-                    <div class='col-md-12'>
-                        <div class='dropdown'>
-
-                            <select name='district' class='form-select' aria-label='Select District' onchange='this.form.submit()'>
-                            
-                                <option value='' id='select'>Select a District</option>
-                                <option value='allRecords' id='allRecords'>All Records</option>
-                                <option value='Ampara' id='Ampara'>Ampara</option>
-                                <option value='Anuradhapura' id='Anuradhapura'>Anuradhapura</option>
-                                <option value='Badulla' id='Badulla'>Badulla</option>
-                                <option value='Batticaloa' id='Batticaloa'>Batticaloa</option>
-                                <option value='Colombo' id='Colombo'>Colombo</option>
-                                <option value='Galle' id='Galle'>Galle</option>
-                                <option value='Hambantota' id='Hambantota'>Hambantota</option>
-                                <option value='Jaffna' id='Jaffna'>Jaffna</option>
-                                <option value='Kalutara' id='Kalutara'>Kalutara</option>
-                                <option value='Kandy' id='Kandy'>Kandy</option>
-                                <option value='Kegalle' id='Kegalle'>Kegalle</option>
-                                <option value='Kilinochchi' id='Kilinochchi'>Kilinochchi</option>
-                                <option value='Kurunegala' id='Kurunegala'>Kurunegala</option>
-                                <option value='Mannar' id='Mannar'>Mannar</option>
-                                <option value='Matale' id='Matale'>Matale</option>
-                                <option value='Matara' id='Matara'>Matara</option>
-                                <option value='Moneragala' id='Moneragala'>Moneragala</option>
-                                <option value='Mullaitivu' id='Mullaitivu'>Mullaitivu</option>
-                                <option value='Nuwara Eliya' id='NuwaraEliya'>Nuwara Eliya</option>
-                                <option value='Polonnaruwa' id='Polonnaruwa'>Polonnaruwa</option>
-                                <option value='Puttalam' id='Puttalam'>Puttalam</option>
-                                <option value='Ratnapura' id='Ratnapura'>Ratnapura</option>
-                                <option value='Trincomalee' id='Trincomalee'>Trincomalee</option>
-                                <option value='Vavuniya' id='Vavuniya'>Vavuniya</option>
-
-                                
-                            </select>
-                        </div>
+    echo "<div class='row' id='selectDistrict'>
+            <form action='' method='GET'>
+                <div class='col-md-12'>
+                    <div class='dropdown'>
+                        <select name='district' class='form-select' aria-label='Select District' onchange='this.form.submit()'>";
+    include 'includes/district_options.php';                                
+    echo "          </select>
                     </div>
-
-                </form>
-            </div>";
-        }
-
-      ?>
+                </div>
+            </form>
+        </div>";
+}
+?>
 
         
       
@@ -122,31 +77,22 @@ print_r($_SESSION);
 
         <?php 
         include 'phpfiles/db.php';
-        $district = 'WHERE addressCity';
-        $district2 = 'jaffna';
 
         // Dropdown record show
+
+        if ($_SESSION['userType'] == 1){     
 
             if (isset($_GET['district'])) { // Check whether $_GET['district'] available
                 //echo $_GET['district'];
                 if($_GET['district'] == 'allRecords'){  //get the district
-                    echo $_GET['district'];
                     $sql = "SELECT * FROM patient;";
-                    //echo $sql;
                     $result_set = mysqli_query($conn, $sql);
-                    echo "<br/>";
-                    echo mysqli_num_rows($result_set). " records found.";
-                    echo "<br/>";
+                    echo mysqli_num_rows($result_set). " records found. <br/>";
                 }
                 if($_GET['district'] != 'allRecords'){
-                    echo $_GET['district'];
                     $sql = "SELECT  `createdTime`,`patientId`, `fName`, `lName`, `gender`,  `dob`, `adrs`, `distric`, `mobileNumber`, `homeNumber` FROM `patient` WHERE `distric`= '{$_GET['district']}'";
-                    echo $sql;
                     $result_set = mysqli_query($conn, $sql);
-                    echo "<br/>";
-                    echo mysqli_num_rows($result_set). " records found.";
-                    echo "<br/>";
-    
+                    echo mysqli_num_rows($result_set). " records found. <br/>";    
                 }
                 
             }
@@ -155,6 +101,15 @@ print_r($_SESSION);
                 $sql = "SELECT  `createdTime`,`patientId`, `fName`, `lName`, `gender`,  `dob`, `adrs`, `distric`, `mobileNumber`, `homeNumber` FROM `patient` ";
                
             }
+
+        }
+        if ($_SESSION['userType'] != 1){ // if user is not usertype 1
+
+                    $sql = "SELECT  `createdTime`,`patientId`, `fName`, `lName`, `gender`,  `dob`, `adrs`, `distric`, `mobileNumber`, `homeNumber` FROM `patient` WHERE `distric`= '{$_SESSION['userOrg']['district']}'";
+                    $result_set = mysqli_query($conn, $sql);
+                    echo mysqli_num_rows($result_set). " records found. <br/>";   
+
+        }
         
 
         
@@ -166,7 +121,6 @@ print_r($_SESSION);
         
 while ($row = mysqli_fetch_assoc($result)) {
     $row['rsltdte'] = "NA";
-    //$row['rslt1'] = 1;
     if(!isset($row['rslt1'])){$row['rslt1']='N/A';}
     if(!isset($row['rslt2'])){$row['rslt2']='N/A';}
     if(!isset($row['rslt3'])){$row['rslt3']='N/A';}

@@ -20,25 +20,28 @@ include 'db.php';
 $hashedPassword = md5($pw);
 $query = "SELECT * FROM practioner WHERE mobileNo = '{$uname}' AND pw = '{$hashedPassword}' AND active =1";
 
-//echo $query.'<br>';
 $result = $conn->query($query);
 
-if ($result !== false) {
+if ($result !== false) { //check and get user information
     if ($result->num_rows == 1) {
         $user = $result->fetch_assoc();
-        print_r($user);
+        //print_r($user);
         $_SESSION['practitionerId'] = $user['practitionerId'];
-
         $_SESSION['practitionerFName'] = $user['practitionerFName'];
-
         //$_SESSION['district'] = $user['district'];
         $_SESSION['userType'] = $user['userType'];
 
-        $_SESSION['organizationId'] = $user['organizationId'];
-
-    $conn->close();
+        $query = "SELECT * FROM `organization` WHERE organizationId='{$user['organizationId']}'";
+        $result = $conn->query($query);
+        if ($result !== false) { // collect user organization information 
+            $userOrg = $result->fetch_assoc();
+            $_SESSION['userOrg'] =  $userOrg; // adding data into session array'userOrg'
+        }
+    
+    
+        $conn->close();
     header("Location: ../home");
-
+        print_r($_SESSION['userOrg']['organizationId']);
 }}
 else{
     header("Location: ../index.php?err");

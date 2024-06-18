@@ -1,5 +1,5 @@
 <?php 
-include 'phpfiles/header.php';
+include '../phpfiles/header.php';
 ?>
 
 <!doctype html>
@@ -9,27 +9,27 @@ include 'phpfiles/header.php';
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>NPTCCD </title>
-    <link rel="apple-touch-icon" sizes="180x180" href="imgs/favicon/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="imgs/favicon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="imgs/favicon/favicon-16x16.png">
-<link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="../imgs/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../imgs/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../imgs/favicon/favicon-16x16.png">
+<link rel="manifest" href="../imgs/favicon/site.webmanifest">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </head>
 
 <body style="background-color: #FFFAFA;">
 
-    <?php include 'includes/topNav.php'; ?>
+    <?php include '../includes/topNav.php'; ?>
 
 <?php 
 
-if (!isset($_GET['ptId'])) {
-    header("Location: findPatient.php?fn=2");
+if (!isset($_GET['patientId'])) {
+    header("Location:findPatient.php?fn=2");
     exit();
 }
 
-include 'phpfiles/db.php';
-    $sql = "SELECT * FROM `analytics` WHERE `ptId`=".$_GET['ptId'];
+include '../phpfiles/db.php';
+    $sql = "SELECT * FROM `patient` WHERE `patientId`=".$_GET['patientId'];
     //echo $sql;
     $result = mysqli_query($conn, $sql);
     $conn->close();
@@ -76,18 +76,18 @@ $filteredDates = filterDates($dates);
             <h5 class="card-title">District chest clinic appointment</h5>
         </div>
         <div class="card-body">
-            <h6 class="card-title">Patient Name : <?php echo $row['nameGiven'].' ' .$row['nameFamily']; ?></h6>
-            <h6 class="card-title">Registration Number : PTB<?php echo $row['ptId']; ?></h6>
-            <h6>Mobile Number : <?php echo $row['mobileNo']; ?></h6>
+            <h6 class="card-title">Patient Name : <?php echo $row['fName'].' ' .$row['lName']; ?></h6>
+            <h6 class="card-title">Registration Number : PTB<?php echo $row['patientId']; ?></h6>
+            <h6>Mobile Number : <?php echo $row['mobileNumber']; ?></h6>
 
-            <form class="row g-3" method="POST" action="phpfiles/getAppointment.php" id="regForm">
+            <form class="row g-3" method="POST" action="../phpfiles/getAppointment.php" id="regForm">
 
 
             <div class="mb-3">
                   <label for="formGroupExampleInput" class="form-label"></label>
                   <select id="inputDistrict" class="form-select"name='dcc'>
                       <option selected>Choose a Chest Clinic.</option>
-                      <?php include 'includes/districtCC_options.php' ?>
+                      <?php include '../includes/districtCC_options.php' ?>
                   </select>
               </div>
 
@@ -139,7 +139,7 @@ $filteredDates = filterDates($dates);
                 </div>
 
               </div>
-<input type="text" name="ptId" value="<?php echo $_GET['ptId']; ?>" hidden> 
+<input type="text" name="ptId" value="<?php echo $_GET['patientId']; ?>" hidden> 
 
     </form>
 
@@ -149,7 +149,7 @@ $filteredDates = filterDates($dates);
 </div>
 
 
-<?php include 'includes/footer.php'; ?> <!-- Footer -->
+<?php include '../includes/footer.php'; ?> <!-- Footer -->
 
 <script>
 function validateClinicDates() {
@@ -157,7 +157,7 @@ function validateClinicDates() {
     var enteredDate = document.getElementById("clincDate").value;
 
     // Fetch the valid dates from the CSV file
-    fetch('clinicDates.csv')
+    fetch('../clinicDates.csv')
         .then(response => response.text())
         .then(data => {
             // Parse CSV data into an array of valid dates
@@ -175,10 +175,10 @@ function validateClinicDates() {
     // Function to handle button click and redirect
     function redirectToPage(pgname) {
         // Get the PHP variable value and pass it to the JavaScript function
-        var ptId = <?php echo json_encode($row['ptId']); ?>;
+        var patientId = <?php echo json_encode($row['patientId']); ?>;
 
         // Redirect to a certain page with ptId in the query string
-        window.location.href = "https://pretb.trainable.lk/pretb/" + pgname + "?ptId=" + ptId;
+        window.location.href = "https://pretb.trainable.lk/pretb/" + pgname + "?patientId=" + patientId;
     }
 </script>
 

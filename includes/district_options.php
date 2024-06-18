@@ -1,28 +1,32 @@
 <?php 
-echo "		  <option value='colombo'>Colombo</option>
-              <option value='gampaha'>Gampaha</option>
-              <option value='kalutara'>Kalutara</option>
-              <option value='kandy'>Kandy</option>
-              <option value='matale'>Matale</option>
-              <option value='nuwaraeliya'>Nuwara Eliya</option>
-              <option value='galle'>Galle</option>
-              <option value='matara'>Matara</option>
-              <option value='hambantota'>Hambantota</option>
-              <option value='jaffna'>Jaffna</option>
-              <option value='kilinochchi'>Kilinochchi</option>
-              <option value='mannar'>Mannar</option>
-              <option value='vavuniya'>Vavuniya</option>
-              <option value='mullaitivu'>Mullaitivu</option>
-              <option value='batticaloa'>Batticaloa</option>
-              <option value='ampara'>Ampara</option>
-              <option value='trincomalee'>Trincomalee</option>
-              <option value='kurunegala'>Kurunegala</option>
-              <option value='puttalam'>Puttalam</option>
-              <option value='anuradhapura'>Anuradhapura</option>
-              <option value='polonnaruwa'>Polonnaruwa</option>
-              <option value='badulla'>Badulla</option>
-              <option value='moneragala'>Moneragala</option>
-              <option value='ratnapura'>Ratnapura</option>
-              <option value='kegalle'>Kegalle</option>";
+              echo "             
+                  <option value='' id='select'>Select a District</option>
+                  <option value='allRecords' id='allRecords'>All Records</option>
+                  <option value='Ampara' id='Ampara'>Ampara</option>
+                  <option value='Anuradhapura' id='Anuradhapura'>Anuradhapura</option>
+                  <option value='Badulla' id='Badulla'>Badulla</option>
+                  <option value='Batticaloa' id='Batticaloa'>Batticaloa</option>
+                  <option value='Colombo' id='Colombo'>Colombo</option>
+                  <option value='Galle' id='Galle'>Galle</option>
+                  <option value='gampaha' id='Gampaha'>Gampaha</option>
+                  <option value='Hambantota' id='Hambantota'>Hambantota</option>
+                  <option value='Jaffna' id='Jaffna'>Jaffna</option>
+                  <option value='Kalutara' id='Kalutara'>Kalutara</option>
+                  <option value='Kandy' id='Kandy'>Kandy</option>
+                  <option value='Kegalle' id='Kegalle'>Kegalle</option>
+                  <option value='Kilinochchi' id='Kilinochchi'>Kilinochchi</option>
+                  <option value='Kurunegala' id='Kurunegala'>Kurunegala</option>
+                  <option value='Mannar' id='Mannar'>Mannar</option>
+                  <option value='Matale' id='Matale'>Matale</option>
+                  <option value='Matara' id='Matara'>Matara</option>
+                  <option value='Moneragala' id='Moneragala'>Moneragala</option>
+                  <option value='Mullaitivu' id='Mullaitivu'>Mullaitivu</option>
+                  <option value='Nuwara Eliya' id='NuwaraEliya'>Nuwara Eliya</option>
+                  <option value='Polonnaruwa' id='Polonnaruwa'>Polonnaruwa</option>
+                  <option value='Puttalam' id='Puttalam'>Puttalam</option>
+                  <option value='Ratnapura' id='Ratnapura'>Ratnapura</option>
+                  <option value='Trincomalee' id='Trincomalee'>Trincomalee</option>
+                  <option value='Vavuniya' id='Vavuniya'>Vavuniya</option>
+";
 
  ?>
